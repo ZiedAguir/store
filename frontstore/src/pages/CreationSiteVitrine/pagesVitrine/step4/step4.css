@@ -1,0 +1,183 @@
+
+/* Full-Screen Animation */
+.step4-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .step4-container.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1000;
+    animation: fadeIn 2s ease-in-out; /* Augmenté la durée pour un effet plus fluide */
+  }
+ 
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Full-Screen Summary */
+  .full-screen-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  /* Buttons */
+  .action-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 1px;
+  }
+  
+  .action-buttons .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Ajout d'une transition douce pour le hover */
+  }
+  
+  .action-buttons .btn:hover {
+    background-color: #0056b3; /* Effet hover sur les boutons */
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+  }
+  
+  .modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    max-width: 100%; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Modal Buttons */
+  .modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+  
+  .modal-actions .btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-actions .btn:hover {
+    background-color: #0056b3; 
+  }
+  
+  .modal-actions .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-actions .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .step4-container.full-screen {
+      width: 100%;
+      height: auto;
+      padding: 20px;
+    }
+  
+    .full-screen-summary {
+      padding: 10px;
+    }
+  
+    .action-buttons {
+      flex-direction: column;
+      bottom: 10px;
+      right: 10px;
+    }
+  
+    .action-buttons .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .modal {
+      width: 80%; 
+      max-width: 90%;
+    }
+    .preview-container{
+      margin-left: 5rem;
+     }
+     .btn{
+      margin-left: 6rem;
+     }
+     .preview-subtitle{
+      margin-left: 2rem;
+     }
+  }
+  
+  /* Pour les grands écrans (ordinateurs portables et plus grands) */
+@media only screen and (min-width: 992px) {
+ .preview-container{
+  margin-top:15rem;
+  margin-left: 35rem;
+ }
+ .btn{
+  margin-left: 6rem;
+ }
+ .preview-subtitle{
+  margin-left: 2rem;
+ }
+ .preview-title{
+  margin-left: 0.2rem;
+ }
+}
+  
+  

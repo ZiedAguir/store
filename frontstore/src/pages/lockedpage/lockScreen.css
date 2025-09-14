@@ -1,0 +1,86 @@
+
+  /* Pour les très petits écrans (téléphones portables en mode portrait) */
+  @media only screen and (max-width: 575px) {
+	.body-sign {
+	  padding: 20px;
+	}
+	.center-sign {
+	  width: 100%;
+	  max-width: 100%;
+	  margin: 0;
+	  
+  
+	}
+	.card-sign {
+	  padding: 20px;
+	  
+	}
+	.logo img {
+	  width: 140px;
+	  height: 90px;
+	}
+  }
+  
+  /* Pour les petits écrans (téléphones portables en mode paysage) */
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+	.center-sign {
+	  width: 90%;
+  
+	}
+	.logo img {
+	  width: 150px;
+	}
+  }
+  
+  /* Pour les écrans moyens (tablettes) */
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.body-sign {
+	  padding: 20px;
+	  margin-left: 20rem;
+	}
+	.center-sign {
+	  width: 70%;
+	}
+	.logo img {
+	  width: 160px;
+	}
+	
+  }
+  
+  /* Pour les grands écrans (ordinateurs portables et plus grands) */
+  @media only screen and (min-width: 992px) {
+	.body-sign {
+	  padding: 20px;
+	  margin-left: 10rem;
+	}
+	.center-sign {
+	  width: 50%;
+
+	}
+	.card-sign {
+	  padding: 20px;
+	}
+	.logo img {
+	  width: 100px;
+	  height: 90px;
+	}
+  }
+  
+  /* Pour les très grands écrans (ordinateurs de bureau, écrans larges) */
+  @media only screen and (min-width: 1200px) {
+	.body-sign {
+	  padding: 20px;
+	  margin-left: 20rem;
+
+	}
+	.center-sign {
+	  width: 50%;
+
+	}
+	.card-sign {
+	  padding: 20px;
+	}
+	.logo img {
+	  width: 150px;
+	}
+  }

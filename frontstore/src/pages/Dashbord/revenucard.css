@@ -1,0 +1,14 @@
+.revenue-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  .revenue-card .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .revenue-card .total-revenue h5 {
+    font-size: 1.5rem;
+  }
+  

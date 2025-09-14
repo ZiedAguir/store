@@ -1,0 +1,57 @@
+.customer-feedback-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .customer-feedback-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  
+  .feedback-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    
+  }
+  
+  .feedback-card {
+    background-color: rgb(166, 205, 241);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .feedback-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .profile-pic {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+  
+  .feedback-content {
+    color: #555;
+  }
+  
+  .customer-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .customer-feedback {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  

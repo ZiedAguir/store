@@ -1,0 +1,154 @@
+/* Step 3 - Page and Component Selection Styles */
+
+.page-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.page-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.page-item:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+}
+
+.page-label {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  background: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-label:hover {
+  background: #e9ecef;
+}
+
+.page-label input[type="checkbox"] {
+  margin-right: 0.75rem;
+  transform: scale(1.2);
+}
+
+.page-link {
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.components-list {
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  background: white;
+  border-radius: 0 0 8px 8px;
+}
+
+.component-item {
+  margin-bottom: 0.5rem;
+}
+
+.component-label {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.component-label:hover {
+  background: #f8f9fa;
+}
+
+.component-label input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.1);
+}
+
+.component-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Badge for "All Components Selected" */
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+/* Animation for component selection */
+.component-item {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .page-label {
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-link {
+    margin-top: 0.5rem;
+  }
+  
+  .components-list {
+    padding: 0.75rem;
+  }
+  
+  .component-label {
+    padding: 0.4rem;
+  }
+}
+
+/* Custom checkbox styling */
+.page-label input[type="checkbox"],
+.component-label input[type="checkbox"] {
+  accent-color: #007bff;
+}
+
+/* Selected page styling */
+.page-item.selected {
+  border-color: #007bff;
+  background: #f0f8ff;
+}
+
+/* Component count indicator */
+.component-count {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: auto;
+  padding: 0.2rem 0.5rem;
+  background: #e9ecef;
+  border-radius: 12px;
+}

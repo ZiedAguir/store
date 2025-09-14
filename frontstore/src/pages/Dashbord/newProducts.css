@@ -1,0 +1,49 @@
+.new-products-admin {
+  padding-top: 8px;
+}
+
+.npa-header {
+  margin-bottom: 16px;
+}
+
+.npa-title {
+  margin: 0;
+}
+
+.npa-state {
+  padding: 12px;
+  color: #6b7280;
+}
+
+.npa-card {
+  border: 1px solid #eef0f2;
+  border-radius: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.npa-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.npa-title-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.npa-footer {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.npa-reason-input {
+  border-radius: 8px;
+}
+
+.npa-error {
+  border-left: 3px solid #dc3545;
+  padding-left: 8px;
+}

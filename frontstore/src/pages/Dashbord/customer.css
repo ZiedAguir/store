@@ -1,0 +1,19 @@
+.customers-by-location .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .customers-by-location ul {
+    padding: 0;
+  }
+  
+  .customers-by-location li {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .customers-by-location .badge {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+  

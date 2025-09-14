@@ -1,0 +1,269 @@
+/* summaryPage.css */
+.header-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+  
+  .header-summary-wrapper {
+transform: translateY(-17rem); /* Déplace sans modifier le flux naturel */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; 
+  }
+  
+  
+.button {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    height: 360px;
+    width: 200px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+
+    &__inner {
+        position: absolute;
+        width: 200px;
+        height: 50px;
+        left: 0;
+        right: 0;
+        top: 50%;
+        margin: auto;
+        border-radius: 2px;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.04);
+        font-weight: 100;
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        transition: all .3s, box-shadow .2s, transform .2s .2s;
+    }
+
+    .button_spots {
+        position: absolute;
+        border-radius: 100px;
+        background: green;
+        opacity: 0;
+        animation: opacity 1s;
+    }
+
+    .tick {
+        position: absolute;
+        left: -40px;
+        right: 0;
+        transform: scale(0);
+        margin: auto;
+        font-size: 22px;
+    }
+
+    &:hover {
+        .button_spots {
+            /* Each of these will have a specific animation defined below */
+            animation: spot-1 1s linear infinite, spot-2 1s linear infinite, spot-3 1s linear infinite;
+        }
+    }
+}
+
+/* Define keyframes for each spot */
+@keyframes spot-1 {
+    from { opacity: 0; }
+    to { transform: translateY(30px); opacity: 0.6; }
+}
+
+@keyframes spot-2 {
+    from { opacity: 0; }
+    to { transform: translateY(35px); opacity: 0.6; }
+}
+
+@keyframes spot-3 {
+    from { opacity: 0; }
+    to { transform: translateY(40px); opacity: 0.6; }
+}
+
+/* Other animations */
+@keyframes fadeInSummary {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.summary-container {
+    animation: fadeInSummary 0.5s ease-out forwards;
+}
+
+.header {
+    animation: slideInFromLeft 0.8s ease-out forwards;
+}
+
+.content {
+    animation: slideInFromRight 1s ease-out forwards;
+}
+
+.button {
+    animation: pulse 1.5s infinite;
+}
+
+.alert {
+    animation: shake 0.5s ease-in-out forwards;
+}
+
+.final-section {
+    animation: bounceIn 1s ease-out forwards;
+}
+
+/* summaryPage.css */
+  .customization-panel-wrapper {
+    position: fixed;
+    top: 0%;
+    bottom: 50%;
+    left: 69%;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 1000;
+  }
+  
+  .customization-panel-wrapper.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .customization-panel {
+    width: 90%;
+    height: 90%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+  }
+  
+  .panel-actions button {
+    margin: 5px;
+  }
+  
+  .summary-page {
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transform: scale(0); 
+    border-radius: 50%; 
+  }
+  
+  .summary-page.standard {
+    max-width: 100%;
+    margin: 0 auto;
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 0; 
+  }
+  
+  .summary-page.compact {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  
+    /* Animation d'apparition en cercle */
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 50%;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, border-radius 0.5s ease-in-out;
+  }
+  
+  .summary-page.compact.animate {
+    border-radius: 8px; 
+  }
+  
+  
+  

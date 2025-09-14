@@ -1,0 +1,18 @@
+
+    .sideContainer {
+      flex: 1;
+      background-color: #fcf5f3;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction:row;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+  
+      .avatar{
+        width: 20%;
+        height: 20%;
+        object-fit: cover;
+      }
+    }
+  

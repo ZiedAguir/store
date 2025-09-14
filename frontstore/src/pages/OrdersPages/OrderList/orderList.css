@@ -1,0 +1,55 @@
+/* For a smoother fade-in effect */
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Bounce effect for buttons */
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    70% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .bounce-button:hover {
+    animation: bounce 0.6s ease-in-out;
+  }
+  
+  /* Adding hover effects for the table rows */
+  .table tr:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  /* For the pagination */
+  .pagination .page-item {
+    transition: transform 0.3s ease;
+  }
+  
+  .pagination .page-item:hover {
+    transform: scale(1.1);
+  }
+  

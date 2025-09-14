@@ -1,0 +1,16 @@
+.sidebar {
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .sidebar-xs {
+    width: 50px; 
+  }
+  
+  .sidebar-sm {
+    width: 150px; 
+  }
+  
+  .sidebar-md {
+    width: 301px; 
+  }
+  

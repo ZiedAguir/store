@@ -1,0 +1,95 @@
+
+.custom-form-container .body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa; 
+}
+
+.custom-form-container .inner-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.custom-form-container .content-body {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Smartphones */
+ @media (max-width: 575px) {
+  .custom-form-container.col-lg-6 {
+    width: 100%;
+  }
+  .custom-form-container.form-horizontal {
+    padding: 20px;
+  }
+  .custom-form-container.card-body {
+    padding: 20px;
+  }
+}
+
+/* Tablettes */
+ @media (min-width: 576px) and (max-width: 768px) {
+  .custom-form-container.col-lg-6 {
+    width: 100%;
+    
+  }
+  .custom-form-container.card {
+    padding: 25px;
+    
+  }
+  .custom-form-container.card-body {
+    padding: 30px;
+  }
+  .btn-spacing {
+    margin-right: 10px; 
+  }
+}
+
+/* Ordinateurs portables */
+ @media (min-width: 769px) and (max-width: 1024px) {
+  .custom-form-container.col-lg-6 {
+    width: 80%;
+    margin: 0 auto;
+
+  }
+  .custom-form-container.card {
+    padding: 30px;
+  }
+  .btn-spacing {
+    margin-right: 10px; 
+  }
+}
+
+/* Ordinateurs de bureau */
+ @media (min-width: 1025px) {
+  .custom-form-container{
+    padding: 0rem 15rem 0rem 15rem;
+    
+  }
+  
+  .btn-spacing {
+    margin-right: 10px;
+  }
+
+ .cont-rt{
+  margin-left: 10rem;
+ }
+  .custom-form-container.col-lg-6 {
+    width: 60%;
+  }
+  .custom-form-container.card {
+    padding: 40px;
+  }
+}
+
+
+
+  

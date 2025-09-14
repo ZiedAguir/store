@@ -1,0 +1,54 @@
+
+.header-ct {
+    text-align: center;
+    background-color: #253636;
+}
+
+.text-center {
+    text-align: center;
+}
+.contct-page{
+    margin-top: 0.05rem;
+    background-color: #84adad;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.breadcrumb {
+    display: inline-flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
