@@ -1,0 +1,80 @@
+services:
+  # Backend API Service
+  - type: web
+    name: store-backend
+    env: node
+    plan: free
+    buildCommand: cd backstore && npm install
+    startCommand: cd backstore && npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://store-frontend.onrender.com
+      # Add your environment variables here
+      - key: DATABASE_URL
+        fromDatabase:
+          name: store-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRE
+        value: 90d
+      - key: JWT_COOKIE_EXPIRE
+        value: 90
+      - key: EMAIL_FROM
+        value: noreply@store.com
+      - key: EMAIL_USERNAME
+        value: your-email@gmail.com
+      - key: EMAIL_PASSWORD
+        value: your-app-password
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: CLOUDINARY_CLOUD_NAME
+        value: your-cloudinary-name
+      - key: CLOUDINARY_API_KEY
+        value: your-cloudinary-key
+      - key: CLOUDINARY_API_SECRET
+        value: your-cloudinary-secret
+      - key: STRIPE_SECRET_KEY
+        value: your-stripe-secret-key
+      - key: STRIPE_WEBHOOK_SECRET
+        value: your-stripe-webhook-secret
+
+  # Frontend Service
+  - type: web
+    name: store-frontend
+    env: static
+    plan: free
+    buildCommand: cd frontstore && npm install && npm run build
+    staticPublishPath: ./frontstore/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://store-backend.onrender.com/api/v1
+      - key: VITE_CLIENT_URL
+        value: https://store-frontend.onrender.com
+      # Add your Firebase config here
+      - key: VITE_FIREBASE_API_KEY
+        value: your-firebase-api-key
+      - key: VITE_FIREBASE_AUTH_DOMAIN
+        value: your-project.firebaseapp.com
+      - key: VITE_FIREBASE_PROJECT_ID
+        value: your-project-id
+      - key: VITE_FIREBASE_STORAGE_BUCKET
+        value: your-project.appspot.com
+      - key: VITE_FIREBASE_MESSAGING_SENDER_ID
+        value: 123456789
+      - key: VITE_FIREBASE_APP_ID
+        value: your-app-id
+      - key: VITE_FIREBASE_MEASUREMENT_ID
+        value: G-XXXXXXXXXX
+
+databases:
+  - name: store-db
+    plan: free
+    databaseName: store
+    user: store_user
