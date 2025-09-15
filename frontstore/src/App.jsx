@@ -17,7 +17,7 @@ import ListCategories from "./pages/CategoryPages/listCategories";
 import FormCategory from "./pages/CategoryPages/formCategories";
 import CouponList from "./pages/CouponPage/couponList";
 import CouponForm from "./pages/CouponPage/couponForm";
-import OrderList from "./pages/OrdersPages/OrderList";
+import OrderList from "./pages/OrdersPages/orderList";
 import CustomersList from "./pages/CustomersPages/customersList";
 import CustomersForm from "./pages/CustomersPages/customersForm";
 import Footer from "./componnent/Footer/footer";
