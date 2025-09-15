@@ -53,14 +53,32 @@ app.use(express.json({ limit: '20kb' }));
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL, 
+    origin: [
+      process.env.CLIENT_URL,
+      "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
+      "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
+      "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:5173"
+    ], 
     credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
   })
 );
 
 // Gère les requêtes preflight (OPTIONS)
-app.options('*', cors());
+app.options('*', cors({
+  origin: [
+    process.env.CLIENT_URL,
+    "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
+    "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
+    "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173"
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+}));
 
 // compress all responses
 app.use(compression());
