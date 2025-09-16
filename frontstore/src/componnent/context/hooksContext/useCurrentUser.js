@@ -25,6 +25,15 @@ export const useCurrentUser = () => {
     console.log("useCurrentUser - errorMessage:", errorMessage);
   }, [currentUser, isLoading, errorMessage]);
 
+  // Charger l'utilisateur au démarrage si un token existe
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token && !currentUser && !isLoading) {
+      console.log("useCurrentUser - Auto-fetching user on startup");
+      fetchUser();
+    }
+  }, []);
+
   const handleError = (error, redirectOnUnauthorized = false) => {
     const errorMessage = error.response?.data?.message || "An error occurred";
     console.error("useCurrentUser - handleError:", errorMessage);

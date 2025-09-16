@@ -51,32 +51,21 @@ app.use(
 // Middlewares
 app.use(express.json({ limit: '20kb' }));
 
-app.use(
-  cors({
-    origin: [
-      process.env.CLIENT_URL,
-      "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
-      "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
-      "http://localhost:3000",
-      "http://localhost:5173"
-    ], 
-    credentials: true, 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
-  })
-);
+// Configuration CORS ultra-permissive pour résoudre le problème
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'false');
+  
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
-// Gère les requêtes preflight (OPTIONS)
-app.options('*', cors({
-  origin: [
-    process.env.CLIENT_URL,
-    "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:5173"
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
-}));
+// CORS géré par le middleware personnalisé ci-dessus
 
 // compress all responses
 app.use(compression());
