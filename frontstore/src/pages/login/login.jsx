@@ -73,8 +73,8 @@ function Login() {
       const response = await apiRequest.post("/auth/login", { email, password });
       
       // Stocker le token dans localStorage
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+      if (response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
       }
       
       setCurrentUser(response.data);
