@@ -21,6 +21,9 @@ dbConnection();
 // Initialize app
 const app = express();
 
+// Trust proxy for Render deployment
+app.set('trust proxy', 1);
+
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());

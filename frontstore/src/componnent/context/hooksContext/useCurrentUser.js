@@ -32,7 +32,7 @@ export const useCurrentUser = () => {
       console.log("useCurrentUser - Auto-fetching user on startup");
       fetchUser();
     }
-  }, []);
+  }, [fetchUser, currentUser, isLoading]);
 
   const handleError = (error, redirectOnUnauthorized = false) => {
     const errorMessage = error.response?.data?.message || "An error occurred";

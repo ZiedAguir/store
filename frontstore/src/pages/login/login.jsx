@@ -71,6 +71,12 @@ function Login() {
     try {
       
       const response = await apiRequest.post("/auth/login", { email, password });
+      
+      // Stocker le token dans localStorage
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+      
       setCurrentUser(response.data);
       navigate("/verify-mfa");
     } catch (err) {
