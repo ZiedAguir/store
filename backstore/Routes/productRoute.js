@@ -18,6 +18,7 @@ const {
   approveProduct,
   rejectProduct,
   getMyProducts,
+  debugProduct,
   
 } = require('../Controllers/productController');
 //const reviewsRoute = require('./reviewRoute');
@@ -48,6 +49,10 @@ router.patch('/:id/reject', protect, restrictTo('admin','superadmin'), rejectPro
 
 // Current user's products
 router.get('/mine', protect, getMyProducts);
+
+// Debug route (temporary)
+router.get('/debug/:id', debugProduct);
+
 router
   .route('/:id')
   .get(getProductValidator, getProduct)
