@@ -15,6 +15,7 @@ const orderRoute = require('./orderRoute');
 const couponRoute = require('./couponRoute');
 const dashboardRoute = require('./dashboardRoute');
 const reportRoute = require('./reportRoute');
+const contactRoute = require('./contactRoute');
 
 
 
@@ -36,6 +37,7 @@ const mountRoutes = (app) => {
   app.use('/api/v1/coupons', couponRoute);
   app.use('/api/v1/dashboard', dashboardRoute);
   app.use('/api/v1/reports', reportRoute);
+ app.use('/api/v1/contact', contactRoute);
 
 
 };
