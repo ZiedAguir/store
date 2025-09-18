@@ -40,12 +40,23 @@ Message:
 ${message}
 
 ---
-This message was sent from your website contact form.
+TO REPLY TO THIS USER:
+1. Reply to this email
+2. Your reply will be automatically sent to: ${email}
+3. The user will receive your response
+
 Time: ${new Date().toLocaleString()}
     `.trim();
 
-    // Send email to zieguir99@gmail.com
-    await sendEmail('zieguir99@gmail.com', emailSubject, emailContent);
+    // Send email to zieguir99@gmail.com with Reply-To set to user's email
+    await sendEmail('zieguir99@gmail.com', emailSubject, emailContent, {
+      replyTo: email,
+      headers: {
+        'Reply-To': email,
+        'X-User-Email': email,
+        'X-User-Name': name
+      }
+    });
 
     // Send confirmation email to the user
     const confirmationSubject = 'Thank you for contacting us!';
@@ -74,6 +85,53 @@ Astar Store Team
     res.status(500).json({
       status: 'error',
       message: 'Sorry, there was an error sending your message. Please try again later.'
+    });
+  }
+});
+
+// @desc    Forward email reply to user
+// @route   POST /api/v1/contact/forward-reply
+// @access  Public (for email forwarding)
+exports.forwardEmailReply = asyncHandler(async (req, res, next) => {
+  const { userEmail, replyMessage, originalSubject } = req.body;
+
+  if (!userEmail || !replyMessage) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'User email and reply message are required'
+    });
+  }
+
+  try {
+    // Send reply to user
+    const replySubject = `Re: ${originalSubject || 'Your inquiry'}`;
+    const replyContent = `
+Hello,
+
+Thank you for contacting us. Here is our response:
+
+${replyMessage}
+
+---
+Best regards,
+Astar Store Team
+
+---
+This is an automated response to your contact form inquiry.
+    `.trim();
+
+    await sendEmail(userEmail, replySubject, replyContent);
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Reply forwarded successfully'
+    });
+
+  } catch (error) {
+    console.error('Error forwarding reply:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Error forwarding reply'
     });
   }
 });
