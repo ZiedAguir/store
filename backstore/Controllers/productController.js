@@ -1,4 +1,4 @@
-const factory = require('./handlerFactories');
+  const factory = require('./handlerFactories');
 const Product = require('../Models/productModel');
 const User = require('../Models/user'); // This imports the 'user' model
 const { uploadMixOfImages, handleMixOfImageUploads } = require('../Middleware/uploadImageMiddleware');
@@ -61,13 +61,27 @@ exports.getProducts = async (req, res) => {
 exports.getProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(`Fetching product with ID: ${id}`);
+    
+    // Check if the ID is a valid MongoDB ObjectId format
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      console.log(`Invalid ObjectId format: ${id}`);
+      return next(new ApiError(`Invalid product ID format: ${id}`, 400));
+    }
+    
     const product = await Product.findById(id)
       .populate({
         path: 'creator',
         select: 'name role _id',
         model: 'user'
       })
-      .populate('reviews');
+      .populate({
+        path: 'reviews',
+        options: { strictPopulate: false }
+      });
+    
+    console.log(`Product found:`, product ? 'Yes' : 'No');
+    
     
     if (!product) {
       return next(new ApiError(`No product found for ID ${id}`, 404));
@@ -75,7 +89,101 @@ exports.getProduct = async (req, res, next) => {
     
     res.status(200).json({ data: product });
   } catch (error) {
-    next(new ApiError(error.message, 400));
+        console.error('Error fetching product:', error);
+    
+    // Handle specific MongoDB errors
+    if (error.name === 'CastError') {
+      return next(new ApiError(`Invalid product ID format: ${req.params.id}`, 400));
+    }
+    
+    // Handle populate errors
+    if (error.name === 'ValidationError') {
+      return next(new ApiError(`Validation error: ${error.message}`, 400));
+    }
+    
+    // Handle other database errors
+    next(new ApiError(`Internal server error: ${error.message}`, 500));
+  }
+};
+
+// @desc    Debug product by id (temporary endpoint for debugging)
+// @route   GET /api/v1/products/debug/:id
+// @access  Public
+exports.debugProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    console.log(`Debug - Fetching product with ID: ${id}`);
+    
+    // Check if the ID is a valid MongoDB ObjectId format
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({
+        status: 'error',
+        message: `Invalid product ID format: ${id}`,
+        debug: {
+          id,
+          isValidFormat: false,
+          expectedFormat: '24 character hexadecimal string'
+        }
+      });
+    }
+    
+    // Try to find the product without populate first
+    const productBasic = await Product.findById(id);
+    console.log(`Debug - Basic product found:`, productBasic ? 'Yes' : 'No');
+    
+    if (!productBasic) {
+      return res.status(404).json({
+        status: 'error',
+        message: `No product found for ID ${id}`,
+        debug: {
+          id,
+          isValidFormat: true,
+          productExists: false
+        }
+      });
+    }
+    
+    // Try with populate
+    const productWithCreator = await Product.findById(id)
+      .populate({
+        path: 'creator',
+        select: 'name role _id',
+        model: 'user'
+      });
+    
+    const productWithReviews = await Product.findById(id)
+      .populate({
+        path: 'reviews',
+        options: { strictPopulate: false }
+      });
+    
+    res.status(200).json({
+      status: 'success',
+      debug: {
+        id,
+        isValidFormat: true,
+        productExists: true,
+        basicProduct: {
+          id: productBasic._id,
+          title: productBasic.title,
+          creator: productBasic.creator,
+          reviews: productBasic.reviews
+        },
+        withCreator: productWithCreator ? 'Success' : 'Failed',
+        withReviews: productWithReviews ? 'Success' : 'Failed'
+      }
+    });
+  } catch (error) {
+    console.error('Debug error:', error);
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+      debug: {
+        errorName: error.name,
+        errorStack: error.stack
+      }
+    });
   }
 };
 
