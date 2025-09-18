@@ -40,10 +40,6 @@ Message:
 ${message}
 
 ---
-TO REPLY TO THIS USER:
-1. Reply to this email
-2. Your reply will be automatically sent to: ${email}
-3. The user will receive your response
 
 Time: ${new Date().toLocaleString()}
     `.trim();
@@ -115,6 +111,9 @@ ${replyMessage}
 ---
 Best regards,
 Astar Store Team
+
+---
+This is an automated response to your contact form inquiry.
     `.trim();
 
     await sendEmail(userEmail, replySubject, replyContent);
