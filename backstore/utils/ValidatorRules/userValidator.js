@@ -104,9 +104,9 @@ exports.updateUserValidator = [
     .withMessage('Email required')
     .isEmail()
     .withMessage('Invalid email address')
-    .custom((val) => 
+    .custom((val, {req}) =>  
     User.findOne({ email: val }).then((user) => {
-        if(user) {
+         if(user && user._id.toString() !== req.user._id.toString()) {
             return Promise.reject( new Error(' E-mail already in user'));
         }
     })
@@ -114,8 +114,8 @@ exports.updateUserValidator = [
    
     check("phone")
     .optional()
-    .isMobilePhone(['ar-TN','ar-EG'])
-    .withMessage('Invalid phone number only accepted TN and EG phone number'),
+   .isMobilePhone()
+    .withMessage('Invalid phone number format'),
 
     check("profileImg").optional(),
 
