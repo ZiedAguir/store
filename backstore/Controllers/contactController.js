@@ -115,9 +115,6 @@ ${replyMessage}
 ---
 Best regards,
 Astar Store Team
-
----
-This is an automated response to your contact form inquiry.
     `.trim();
 
     await sendEmail(userEmail, replySubject, replyContent);
