@@ -78,8 +78,10 @@ app.use(
       "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
       "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
       "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+      "https://store-commerce-gqxfcqdpq-ziedaguirs-projects.vercel.app",
       "http://localhost:3000",
-      "http://localhost:5173"
+      "http://localhost:5173",
+      "*"
     ], 
     credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
@@ -93,8 +95,10 @@ app.options('*', cors({
     "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
     "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
     "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+    "https://store-commerce-gqxfcqdpq-ziedaguirs-projects.vercel.app",
     "http://localhost:3000",
-    "http://localhost:5173"
+    "http://localhost:5173",
+    "*"
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
@@ -129,7 +133,8 @@ app.get('/', (req, res) => {
       brands: '/api/v1/brands',
       coupons: '/api/v1/coupons',
       dashboard: '/api/v1/dashboard',
-      reports: '/api/v1/reports'
+      reports: '/api/v1/reports',
+      contact: '/api/v1/contact'
     }
   });
 });
