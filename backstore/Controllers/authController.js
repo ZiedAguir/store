@@ -105,21 +105,17 @@ exports.signupSuperAdmin = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/auth/login
 // @access public
 exports.login = asyncHandler(async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    console.log('Login attempt for email:', email);
-    
-    const user = await User.findOne({ email });
-    if (!user) {
-      console.log('User not found for email:', email);
-      return next(new ApiError('Incorrect email or password', 401));
-    }
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    console.log('User not found for email:', email);
+    return next(new ApiError('Incorrect email or password', 401));
+  }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-      console.log('Incorrect password for email:', email);
-      return next(new ApiError('Incorrect email or password', 401));
-    }
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+  if (!isPasswordCorrect) {
+    return next(new ApiError('Incorrect email or password', 401));
+  }
   const mfaCode = Math.floor(100000 + Math.random() * 900000).toString();
   user.mfaCode = mfaCode;
   user.mfaExpires = Date.now() + 10 * 60 * 1000;
@@ -127,24 +123,19 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   console.log(`Generated MFA code for ${email}: ${mfaCode}`);
 
-  // Try to send email, but don't fail if email service is not configured
-  try {
-    await sendEmail(user.email, 'Your MFA Code', `Your MFA code is: ${mfaCode}`);
-    console.log('MFA code sent via email successfully');
-  } catch (emailError) {
-    console.log('Email sending failed, but continuing with login:', emailError.message);
-  }
+  await sendEmail(user.email, 'Your MFA Code', `Your MFA code is: ${mfaCode}`);
 
   res.status(200).json({
     message: 'MFA code sent to your email. Please verify to proceed.',
     role: user.role,
-    mfaCode: mfaCode, // Include MFA code in response for testing
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      profileImg: user.profileImg
+    }
   });
-  
-  } catch (error) {
-    console.error('Login error:', error);
-    return next(new ApiError('Login failed. Please try again.', 500));
-  }
 });
 
 // @desc Logout
@@ -206,10 +197,19 @@ exports.verifyMfa = asyncHandler(async (req, res, next) => {
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   });
 
-  // Répondre avec l'accessToken et le rôle de l'utilisateur
+  // Répondre avec l'accessToken et les données utilisateur
   res.status(200).json({
     accessToken,
-    role: user.role, 
+    role: user.role,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      profileImg: user.profileImg,
+      images: user.images,
+      isVerified: user.isVerified
+    },
     message: 'MFA verified successfully',
   });
 });
@@ -219,7 +219,7 @@ exports.verifyMfa = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/auth/refresh-token
 // @access public
 exports.refreshToken = asyncHandler(async (req, res, next) => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.body.refreshToken || req.cookies.refreshToken;
 
   if (!refreshToken) {
     return next(new ApiError('Refresh token is required', 401));
