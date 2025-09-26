@@ -68,23 +68,31 @@ function Login() {
     const formData = new FormData(e.target);
       const email = formData.get("email");
       const password = formData.get("password");
+    
+    console.log("Starting login process for:", email);
+    
     try {
-      
       const response = await apiRequest.post("/auth/login", { email, password });
       
       console.log("Login response:", response.data);
+      console.log("Response status:", response.status);
       
       // Store user email and role for MFA verification (no token yet)
       // The accessToken will be provided after MFA verification
-      setCurrentUser({ 
+      const userData = { 
         email: email, 
         role: response.data.role 
-      });
+      };
+      
+      console.log("Setting current user:", userData);
+      setCurrentUser(userData);
       
       console.log("Navigating to MFA page...");
       navigate("/verify-mfa");
+      console.log("Navigation called successfully");
     } catch (err) {
       console.error("Error during login:", err);
+      console.error("Error details:", err.response?.data);
       setError(err.response?.data?.message || "Login failed. Please try again.");
     } finally {
       setIsLoading(false);

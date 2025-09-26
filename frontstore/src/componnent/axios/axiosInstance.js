@@ -7,15 +7,22 @@ const apiRequest = axios.create({
   withCredentials: false, // Désactivé pour éviter les problèmes CORS
 });
 
-// Intercepteur pour ajouter le token à toutes les requêtes
+// Intercepteur pour ajouter le token aux requêtes protégées uniquement
 apiRequest.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     console.log("Axios interceptor - Token found:", !!token);
     console.log("Axios interceptor - Request URL:", config.url);
-    if (token) {
+    
+    // Exclude authentication endpoints from token addition
+    const authEndpoints = ['/auth/login', '/auth/register', '/auth/signup', '/auth/google', '/auth/verify-mfa'];
+    const isAuthEndpoint = authEndpoints.some(endpoint => config.url?.includes(endpoint));
+    
+    if (token && !isAuthEndpoint) {
       config.headers.Authorization = `Bearer ${token}`;
       console.log("Axios interceptor - Authorization header added");
+    } else if (isAuthEndpoint) {
+      console.log("Axios interceptor - Skipping token for auth endpoint");
     } else {
       console.log("Axios interceptor - No token found in localStorage");
     }
