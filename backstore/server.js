@@ -55,14 +55,53 @@ app.use(
 app.use(express.json({ limit: '20kb' }));
 
 
-// Configuration CORS ultra-permissive pour résoudre le problème
+// Configuration CORS pour résoudre le problème
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  const allowedOrigins = [
+    process.env.CLIENT_URL,
+    "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
+    "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
+    "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173"
+  ];
+  
+  // Debug logging
+  console.log('CORS Debug - Origin:', origin);
+  console.log('CORS Debug - Allowed Origins:', allowedOrigins);
+  console.log('CORS Debug - Method:', req.method);
+  console.log('CORS Debug - URL:', req.url);
+  
+  // When credentials is true, we cannot use wildcard (*) for origin
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    console.log('CORS Debug - Allowed with credentials');
+  } else if (origin) {
+    // For development, allow any origin but with credentials
+    if (process.env.NODE_ENV === 'development') {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Credentials', 'true');
+      console.log('CORS Debug - Development mode: Allowed with credentials for origin:', origin);
+    } else {
+      // For production, allow but without credentials
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Credentials', 'false');
+      console.log('CORS Debug - Production: Allowed without credentials for origin:', origin);
+    }
+  } else {
+    // Fallback for requests without origin header
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'false');
+    console.log('CORS Debug - No origin header, using wildcard');
+  }
+  
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'false');
   
   if (req.method === 'OPTIONS') {
+    console.log('CORS Debug - Handling OPTIONS preflight request');
     res.sendStatus(200);
   } else {
     next();
@@ -73,16 +112,30 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: [
-      process.env.CLIENT_URL,
-      "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
-      "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
-      "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
-      "https://store-commerce-gqxfcqdpq-ziedaguirs-projects.vercel.app",
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "*"
-    ], 
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        process.env.CLIENT_URL,
+        "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
+        "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
+        "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5173"
+      ];
+      
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      
+      // For development, allow any localhost origin
+      if (process.env.NODE_ENV === 'development' && origin && origin.includes('localhost')) {
+        return callback(null, true);
+      }
+      
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
   })
@@ -90,16 +143,30 @@ app.use(
 
 // Gère les requêtes preflight (OPTIONS)
 app.options('*', cors({
-  origin: [
-    process.env.CLIENT_URL,
-    "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-gqxfcqdpq-ziedaguirs-projects.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "*"
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      process.env.CLIENT_URL,
+      "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
+      "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
+      "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:5173"
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // For development, allow any localhost origin
+    if (process.env.NODE_ENV === 'development' && origin && origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 }));
