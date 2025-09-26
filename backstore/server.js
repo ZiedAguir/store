@@ -55,60 +55,7 @@ app.use(
 app.use(express.json({ limit: '20kb' }));
 
 
-// Configuration CORS pour résoudre le problème
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  const allowedOrigins = [
-    process.env.CLIENT_URL,
-    "https://store-commerce-3h7onvp52-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-mt0xs5bvn-ziedaguirs-projects.vercel.app",
-    "https://store-commerce-2myotrzpx-ziedaguirs-projects.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:5173"
-  ];
-  
-  // Debug logging
-  console.log('CORS Debug - Origin:', origin);
-  console.log('CORS Debug - Allowed Origins:', allowedOrigins);
-  console.log('CORS Debug - Method:', req.method);
-  console.log('CORS Debug - URL:', req.url);
-  
-  // When credentials is true, we cannot use wildcard (*) for origin
-  if (allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    console.log('CORS Debug - Allowed with credentials');
-  } else if (origin) {
-    // For development, allow any origin but with credentials
-    if (process.env.NODE_ENV === 'development') {
-      res.header('Access-Control-Allow-Origin', origin);
-      res.header('Access-Control-Allow-Credentials', 'true');
-      console.log('CORS Debug - Development mode: Allowed with credentials for origin:', origin);
-    } else {
-      // For production, allow but without credentials
-      res.header('Access-Control-Allow-Origin', origin);
-      res.header('Access-Control-Allow-Credentials', 'false');
-      console.log('CORS Debug - Production: Allowed without credentials for origin:', origin);
-    }
-  } else {
-    // Fallback for requests without origin header
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', 'false');
-    console.log('CORS Debug - No origin header, using wildcard');
-  }
-  
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  
-  if (req.method === 'OPTIONS') {
-    console.log('CORS Debug - Handling OPTIONS preflight request');
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
-
-// CORS géré par le middleware personnalisé ci-dessus
+// CORS will be handled by the main cors middleware below
 
 app.use(
   cors({
@@ -122,19 +69,35 @@ app.use(
         "http://localhost:5173"
       ];
       
+      console.log('Main CORS - Origin:', origin);
+      console.log('Main CORS - NODE_ENV:', process.env.NODE_ENV);
+      
       // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
+      if (!origin) {
+        console.log('Main CORS - No origin, allowing');
+        return callback(null, true);
+      }
       
       if (allowedOrigins.includes(origin)) {
+        console.log('Main CORS - Origin in allowed list');
         return callback(null, true);
       }
       
       // For development, allow any localhost origin
       if (process.env.NODE_ENV === 'development' && origin && origin.includes('localhost')) {
+        console.log('Main CORS - Development localhost allowed');
         return callback(null, true);
       }
       
-      callback(new Error('Not allowed by CORS'));
+      // For development, allow any origin
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Main CORS - Development mode, allowing any origin:', origin);
+        return callback(null, true);
+      }
+      
+      // For production, still allow but log the origin for debugging
+      console.log('Main CORS - Production mode, allowing origin:', origin);
+      return callback(null, true);
     },
     credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
@@ -153,19 +116,34 @@ app.options('*', cors({
       "http://localhost:5173"
     ];
     
+    console.log('OPTIONS CORS - Origin:', origin);
+    
     // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      console.log('OPTIONS CORS - No origin, allowing');
+      return callback(null, true);
+    }
     
     if (allowedOrigins.includes(origin)) {
+      console.log('OPTIONS CORS - Origin in allowed list');
       return callback(null, true);
     }
     
     // For development, allow any localhost origin
     if (process.env.NODE_ENV === 'development' && origin && origin.includes('localhost')) {
+      console.log('OPTIONS CORS - Development localhost allowed');
       return callback(null, true);
     }
     
-    callback(new Error('Not allowed by CORS'));
+    // For development, allow any origin
+    if (process.env.NODE_ENV === 'development') {
+      console.log('OPTIONS CORS - Development mode, allowing any origin:', origin);
+      return callback(null, true);
+    }
+    
+    // For production, still allow but log the origin for debugging
+    console.log('OPTIONS CORS - Production mode, allowing origin:', origin);
+    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
@@ -203,6 +181,16 @@ app.get('/', (req, res) => {
       reports: '/api/v1/reports',
       contact: '/api/v1/contact'
     }
+  });
+});
+
+// CORS test route
+app.get('/api/v1/test-cors', (req, res) => {
+  res.json({
+    message: 'CORS test successful!',
+    timestamp: new Date().toISOString(),
+    origin: req.headers.origin,
+    method: req.method
   });
 });
 
