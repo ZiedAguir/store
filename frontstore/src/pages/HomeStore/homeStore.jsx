@@ -5,10 +5,11 @@ import LatestNews from "../pageStore/information";
 import Slider from "../pageStore/slider";
 import Template from "../pageStore/template";
 import VersionAstraStore from "../pageStore/versionAstraStore";
+import "./homeStore.css";
 
 function HomeStore() {
   return (
-    <div className="body">
+    <div className="body" style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
       {/* Composant Header statique */}
       <HeaderStore/>
       
@@ -16,7 +17,9 @@ function HomeStore() {
       
 
       {/* Contenu principal */}
-      <div role="main" className="main">
+      <div role="main" className="main" style={{ minHeight: '80vh', padding: '20px 0' }}>
+        
+        
         <CompanyInformation/>
         <LatestNews/>
         <Template/>

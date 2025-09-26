@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom";
+
 function Template() {
   return (
     <div>
@@ -21,13 +23,13 @@ function Template() {
               <div className="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">
                 <div className="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay={0} data-appear-animation-duration={750}>
                   <div className="portfolio-item hover-effect-1 text-center pb-2 mb-3false">
-                    <a target="_blank" href="layouts-default.html">
+                    <Link to="/">
                       <div className="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">
                         <div className="thumb-info-wrapper thumb-info-wrapper-demos m-0" >
                           <img src="img/landing/commerce.jpg"  width={350} height={259}  data-plugin-options="{'threshold': 500, 'effect':'fadeIn'}" data-original="img/landing/commerce.jpg"  className="img-fluid h-auto" alt="img1" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <h5 className="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">E-commerce</h5>
                   </div>
                 </div>
@@ -35,13 +37,13 @@ function Template() {
               <div className="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">
                 <div className="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay={200} data-appear-animation-duration={750}>
                   <div className="portfolio-item hover-effect-1 text-center pb-2 mb-3 portfolio-item-new">
-                    <a target="_blank" href="ecommerce-dashboard.html">
+                    <Link to="/">
                       <div className="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">
                         <div className="thumb-info-wrapper thumb-info-wrapper-demos m-0">
                           <img src="img/landing/Education.jpeg"  data-plugin-options="{'threshold': 500, 'effect':'fadeIn'}" data-original="img/landing/Education.jpeg" width={350} height={259} className="img-fluid h-auto" alt="img2" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <h5 className="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">Education</h5>
                   </div>
                 </div>
@@ -49,13 +51,13 @@ function Template() {
               <div className="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">
                 <div className="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay={400} data-appear-animation-duration={750}>
                   <div className="portfolio-item hover-effect-1 text-center pb-2 mb-3false">
-                    <a target="_blank" href="layouts-dark-header.html">
+                    <Link to="/">
                       <div className="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">
                         <div className="thumb-info-wrapper thumb-info-wrapper-demos m-0">
                           <img src="img/landing/Healthcare.jpeg"data-plugin-options="{'threshold': 500, 'effect':'fadeIn'}" data-original="img/landing/Healthcare.jpeg" width={350} height={259} className="img-fluid h-auto" alt="img3" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <h5 className="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">Healthcare</h5>
                   </div>
                 </div>
@@ -63,13 +65,13 @@ function Template() {
               <div className="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">
                 <div className="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay={600} data-appear-animation-duration={750}>
                   <div className="portfolio-item hover-effect-1 text-center pb-2 mb-3false">
-                    <a target="_blank" href="layouts-dark.html">
+                    <Link to="/">
                       <div className="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">
                         <div className="thumb-info-wrapper thumb-info-wrapper-demos m-0">
                           <img src="img/landing/images.png" data-plugin-options="{'threshold': 500, 'effect':'fadeIn'}" data-original="img/landing/images.png" width={400} height={259} className="img-fluid h-auto" alt="img4" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <h5 className="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">Finance</h5>
                   </div>
                 </div>
@@ -78,13 +80,13 @@ function Template() {
               <div className="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">
                 <div className="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay={200} data-appear-animation-duration={750}>
                   <div className="portfolio-item hover-effect-1 text-center pb-2 mb-3false">
-                    <a target="_blank" href="layouts-sidebar-sizes-xs.html">
+                    <Link to="/">
                       <div className="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">
                         <div className="thumb-info-wrapper thumb-info-wrapper-demos m-0">
                           <img src="img/landing/Real estate1.jpeg" width={350} height={259}  data-plugin-options="{'threshold': 500, 'effect':'fadeIn'}" data-original="img/landing/Real estate1.jpeg"  className="img-fluid h-auto" alt="img" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <h5 className="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">Real Estate</h5>
                   </div>
                 </div>
@@ -92,7 +94,7 @@ function Template() {
             </div>
             <div className="row pt-3 mt-5">
               <div className="col text-center">
-                <a href="layouts-default.html" className="btn btn-dark btn-rounded btn-modern btn-px-5 py-3 text-3 appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay={300}>VIEW MAIN DASHBOARD</a>
+                <Link to="/" className="btn btn-dark btn-rounded btn-modern btn-px-5 py-3 text-3 appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay={300}>VIEW MAIN DASHBOARD</Link>
               </div>
             </div>
           </div>

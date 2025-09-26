@@ -28,11 +28,12 @@ function VerifyMfa() {
       console.log("VerifyMfa - MFA verification response:", response.data);
 
       if (response.status === 200) {
-        const { accessToken, user } = response.data;
-        console.log("VerifyMfa - Setting token and user:", { accessToken: !!accessToken, user });
+        const { accessToken, role } = response.data;
+        console.log("VerifyMfa - Setting token and role:", { accessToken: !!accessToken, role });
         
         localStorage.setItem("token", accessToken);
-        setCurrentUser(user);
+        // Store basic user info with role
+        setCurrentUser({ email, role });
         
         console.log("VerifyMfa - About to fetch user data");
         await fetchUser();

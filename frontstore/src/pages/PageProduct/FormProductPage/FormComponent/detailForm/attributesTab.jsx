@@ -1,6 +1,7 @@
-const AttributesTab = ({ formData, handleInputChange, inputSizes, inputColors, handleInputBlur }) => {
+const AttributesTab = ({ formData, handleInputChange, inputSizes, inputColors, handleInputBlur, activeTab }) => {
+  const isActive = activeTab === "attributes";
   return (
-    <div className="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
       <div className="form-group row align-items-center pb-3">
         <label className="col-lg-5 col-xl-3 control-label text-lg-end mb-0">
           Sizes

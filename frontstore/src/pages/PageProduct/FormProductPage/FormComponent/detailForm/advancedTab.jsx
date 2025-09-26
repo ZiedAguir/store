@@ -1,6 +1,7 @@
-const AdvancedTab = ({ formData, handleInputChange }) => {
+const AdvancedTab = ({ formData, handleInputChange, activeTab }) => {
+  const isActive = activeTab === "advanced";
   return (
-    <div className="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
       <div className="form-group row align-items-center pb-3">
         <label className="col-lg-5 col-xl-3 control-label text-lg-end mb-0">
           Purchase Note

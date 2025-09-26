@@ -1,7 +1,9 @@
+import { useState } from "react";
 import Header from "../../componnent/Header/headerprofil";
 import SideBar from "../../componnent/SideBare/sideBare";
 
 function CouponForm() {
+  const [activeTab, setActiveTab] = useState("general");
   return (
     <section className="body">
       {/* start: header */}
@@ -51,35 +53,32 @@ function CouponForm() {
                           aria-orientation="vertical"
                         >
                           <a
-                            className="nav-link active"
+                            className={`nav-link ${activeTab === "general" ? "active" : ""}`}
                             id="general-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#general"
                             role="tab"
                             aria-controls="general"
-                            aria-selected="true"
+                            aria-selected={activeTab === "general"}
+                            onClick={() => setActiveTab("general")}
                           >
                             <i className="bx bx-cog me-2" /> General
                           </a>
                           <a
-                            className="nav-link"
+                            className={`nav-link ${activeTab === "usage-restriction" ? "active" : ""}`}
                             id="usage-restriction-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#usage-restriction"
                             role="tab"
                             aria-controls="usage-restriction"
-                            aria-selected="false"
+                            aria-selected={activeTab === "usage-restriction"}
+                            onClick={() => setActiveTab("usage-restriction")}
                           >
                             <i className="bx bx-block me-2" /> Usage Restriction
                           </a>
                           <a
-                            className="nav-link"
+                            className={`nav-link ${activeTab === "usage-limits" ? "active" : ""}`}
                             id="usage-limits-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#usage-limits"
                             role="tab"
                             aria-controls="usage-limits"
-                            aria-selected="false"
+                            aria-selected={activeTab === "usage-limits"}
+                            onClick={() => setActiveTab("usage-limits")}
                           >
                             <i className="bx bx-timer me-2" /> Usage Limits
                           </a>
@@ -88,7 +87,7 @@ function CouponForm() {
                       <div className="col-lg-3-5 col-xl-4-5">
                         <div className="tab-content" id="tabContent">
                           <div
-                            className="tab-pane fade show active"
+                            className={`tab-pane fade ${activeTab === "general" ? "show active" : ""}`}
                             id="general"
                             role="tabpanel"
                             aria-labelledby="general-tab"
@@ -157,7 +156,7 @@ function CouponForm() {
                             </div>
                           </div>
                           <div
-                            className="tab-pane fade"
+                            className={`tab-pane fade ${activeTab === "usage-restriction" ? "show active" : ""}`}
                             id="usage-restriction"
                             role="tabpanel"
                             aria-labelledby="usage-restriction-tab"
@@ -312,7 +311,7 @@ function CouponForm() {
                             </div>
                           </div>
                           <div
-                            className="tab-pane fade"
+                            className={`tab-pane fade ${activeTab === "usage-limits" ? "show active" : ""}`}
                             id="usage-limits"
                             role="tabpanel"
                             aria-labelledby="usage-limits-tab"

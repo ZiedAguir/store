@@ -1,6 +1,7 @@
-const PriceTab = ({ formData, handleInputChange, priceErrors }) => {
+const PriceTab = ({ formData, handleInputChange, priceErrors, activeTab }) => {
+  const isActive = activeTab === "price";
   return (
-    <div className="tab-pane fade show active" id="price" role="tabpanel" aria-labelledby="price-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="price" role="tabpanel" aria-labelledby="price-tab">
       {/* Price validation rules info */}
      
       

@@ -28,6 +28,7 @@ import Step1 from "./pages/CreationSiteVitrine/pagesVitrine/step1";
 import Step2 from "./pages/CreationSiteVitrine/pagesVitrine/step2";
 import Step3 from "./pages/CreationSiteVitrine/pagesVitrine/step3";
 import SummaryPage from "./pages/CreationSiteVitrine/pagesVitrine/summaryPage";
+import SimpleEmailReply from "./pages/SimpleEmailReply/simpleEmailReply";
 import AppRoutes from "./pages/CreationSiteVitrine/AppRoutes/appRoutes";
 import HomeProduct from "./pages/PageProduct/HomeProductPage/HomeProduct";
 import ContactPage from "./pages/ContactPage/homecontact";
@@ -88,6 +89,10 @@ function App() {
     {
       path: "/contactuspage",
       element: <ContactPage />,
+    },
+    {
+      path: "/email-reply",
+      element: <SimpleEmailReply />,
     },
     {
       path: "/aboutuspage",

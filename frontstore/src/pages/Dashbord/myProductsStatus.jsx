@@ -69,7 +69,15 @@ function MyProductsStatus() {
                   <div className="description-clamp">{product.description}</div>
                 </div>
                 <div className="mt-2">
-                  <span className={`badge me-2 mps-badge mps-${product.approvalStatus || 'approved'}`}>Status: {product.approvalStatus || 'approved'}</span>
+                  <span className={`badge me-2 mps-badge mps-${product.approvalStatus || 'approved'}`}>
+                    {product.approvalStatus === 'approved' && '✅'}
+                    {product.approvalStatus === 'pending' && '⏳'}
+                    {product.approvalStatus === 'rejected' && '❌'}
+                    {' '}
+                    {product.approvalStatus === 'approved' ? 'APPROVED' : 
+                     product.approvalStatus === 'pending' ? 'PENDING' : 
+                     product.approvalStatus === 'rejected' ? 'REJECTED' : 'APPROVED'}
+                  </span>
                   {product.approvalStatus === 'rejected' && (
                     <>
                       <div className="text-danger small mt-2 mps-reason">Reason: {product.rejectionReason || 'No reason provided'}</div>

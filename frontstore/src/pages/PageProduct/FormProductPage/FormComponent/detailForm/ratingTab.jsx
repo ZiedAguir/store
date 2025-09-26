@@ -1,7 +1,8 @@
 
-const RatingTab = ({ formData, handleInputChange, ratingErrors }) => {
+const RatingTab = ({ formData, handleInputChange, ratingErrors, activeTab }) => {
+  const isActive = activeTab === "rating";
   return (
-    <div className="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="rating" role="tabpanel" aria-labelledby="rating-tab">
       {/* Rating validation rules info */}
      
       

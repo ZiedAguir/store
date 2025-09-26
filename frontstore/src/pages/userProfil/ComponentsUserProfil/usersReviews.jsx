@@ -3,7 +3,8 @@ import apiRequest from "../../../componnent/axios/axiosInstance";
 import moment from "moment";
 import { FormContext } from "../../../componnent/context/AuthContext";
 
-function UsersReviews() {
+function UsersReviews({ activeTab }) {
+  const isActive = activeTab === "overview";
   const { currentUser } = useContext(FormContext);
   const [message, setMessage] = useState("");
   const [preview, setPreview] = useState(null);
@@ -155,7 +156,7 @@ function UsersReviews() {
   };
 
   return (
-    <div id="overview" className="tab-pane active">
+    <div id="overview" className={`tab-pane ${isActive ? "active" : ""}`}>
       <div className="p-3">
         <h4 className="mb-3 font-weight-semibold text-dark">Write your comment</h4>
         <section className="simple-compose-box mb-3">

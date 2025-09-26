@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../componnent/Header/headerprofil";
 import SideBar from "../../../componnent/SideBare/sideBare";
 import DetailProduct from "./FormComponent/detailProduct";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import GeneralInfo from "./FormComponent/generalInfo";
 import ImageForm from "./FormComponent/imageForm";
 import { addProduct, deleteProduct, updateProduct } from "../../../Redux/Action/productActions";
@@ -445,12 +445,12 @@ function FormProducts() {
                 </button>
               </div>
               <div className="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
-                <a
-                  href="/ListProducts"
+                <Link
+                  to="/ListProducts"
                   className="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3"
                 >
                   Cancel
-                </a>
+                </Link>
               </div>
               {isEditMode && (
                 <div className="col-12 col-md-auto ms-md-auto mt-3 mt-md-0 ms-auto">

@@ -1,17 +1,494 @@
 /* summaryPage.css */
-.header-wrapper {
+  .header-wrapper {
     position: relative;
     z-index: 10;
+    width: 100%;
+  }
+
+  .inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+  }
+
+  .inner-wrapper aside {
+    flex: 0 0 auto;
+  }
+
+  .inner-wrapper .header-summary-wrapper {
+    flex: 1;
+    padding: 20px;
   }
   
   .header-summary-wrapper {
-transform: translateY(-17rem); /* Déplace sans modifier le flux naturel */
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 20px;
+    gap: 15px;
+  }
+
+  .header-summary-wrapper .content-body {
+    width: 100%;
+  }
+
+  .header-summary-wrapper .page-header {
+    width: 100%;
+  }
+
+  .header-summary-wrapper .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .header-summary-wrapper .logo-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .header-summary-wrapper .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .header-summary-wrapper .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-summary-wrapper .nav-link {
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-summary-wrapper .nav-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .nav-link:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .nav-link i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .header-summary-wrapper .nav-link:hover i {
+    transform: scale(1.1);
+  }
+
+  /* Styles pour les éléments du header summary */
+  .header-summary-wrapper .nav-pills {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header-summary-wrapper .nav-pills li {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style pour le rating horizontal */
+  .header-summary-wrapper .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-summary-wrapper .rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  /* Style pour les séparateurs */
+  .header-summary-wrapper .separator {
+    width: 1px;
+    height: 20px;
+    background-color: #dee2e6;
+    margin: 0 10px;
+  }
+
+  /* Style pour les dropdowns */
+  .header-summary-wrapper .dropdown {
+    position: relative;
+  }
+
+  .header-summary-wrapper .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 150px;
+    padding: 5px 0;
+  }
+
+  .header-summary-wrapper .dropdown-menu li {
+    padding: 0;
+  }
+
+  .header-summary-wrapper .dropdown-menu .nav-link {
+    display: block;
+    padding: 8px 16px;
+    color: #495057;
+    text-decoration: none;
+  }
+
+  .header-summary-wrapper .dropdown-menu .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+  }
+
+  /* Styles uniformes pour tous les boutons dropdown */
+  .header-summary-wrapper .dropdown > .nav-link {
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-summary-wrapper .dropdown > .nav-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .dropdown > .nav-link:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .dropdown > .nav-link i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .header-summary-wrapper .dropdown > .nav-link:hover i {
+    transform: scale(1.1);
+  }
+
+  /* Style pour les flèches dropdown */
+  .header-summary-wrapper .dropdown > .nav-link::after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-left: 6px;
+    transition: all 0.3s ease;
+    font-size: 12px;
+  }
+
+  .header-summary-wrapper .dropdown:hover > .nav-link::after {
+    transform: rotate(180deg);
+    color: white;
+  }
+
+  /* Style pour les dropdowns ouverts */
+  .header-summary-wrapper .dropdown.active > .nav-link,
+  .header-summary-wrapper .dropdown.show > .nav-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .dropdown.active > .nav-link::after,
+  .header-summary-wrapper .dropdown.show > .nav-link::after {
+    transform: rotate(180deg);
+    color: white;
+  }
+
+  /* Styles spécifiques pour Elements et More components */
+  .header-summary-wrapper .nav-pills > li > .nav-link,
+  .header-summary-wrapper .nav-pills > li > a {
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-summary-wrapper .nav-pills > li > .nav-link:hover,
+  .header-summary-wrapper .nav-pills > li > a:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .nav-pills > li > .nav-link:active,
+  .header-summary-wrapper .nav-pills > li > a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .nav-pills > li > .nav-link i,
+  .header-summary-wrapper .nav-pills > li > a i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .header-summary-wrapper .nav-pills > li > .nav-link:hover i,
+  .header-summary-wrapper .nav-pills > li > a:hover i {
+    transform: scale(1.1);
+  }
+
+  /* Style pour les liens actifs */
+  .header-summary-wrapper .nav-pills > li.active > .nav-link,
+  .header-summary-wrapper .nav-pills > li.active > a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  /* Style pour les mega menus */
+  .header-summary-wrapper .dropdown-mega > .nav-link {
+    padding: 10px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-summary-wrapper .dropdown-mega > .nav-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .dropdown-mega > .nav-link i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .header-summary-wrapper .dropdown-mega > .nav-link:hover i {
+    transform: scale(1.1);
+  }
+
+  /* Styles spécifiques pour le StatusComponent */
+  .header-summary-wrapper .statusbox {
+    position: relative;
+    display: inline-block;
+  }
+
+  .header-summary-wrapper .statusbox .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+
+  .header-summary-wrapper .statusbox .nav-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .statusbox .nav-link.show {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+
+  .header-summary-wrapper .statusbox .status-info strong {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .header-summary-wrapper .statusbox .status-value {
+    font-weight: 500;
+  }
+
+  .header-summary-wrapper .statusbox .fa-chevron-down {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .header-summary-wrapper .statusbox .nav-link.show .fa-chevron-down {
+    transform: rotate(180deg);
+  }
+
+  .header-summary-wrapper .statusbox .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 160px;
+    padding: 8px 0;
+    margin-top: 4px;
+  }
+
+  .header-summary-wrapper .statusbox .dropdown-menu .list-unstyled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header-summary-wrapper .statusbox .dropdown-menu li {
+    margin: 0;
+  }
+
+  .header-summary-wrapper .statusbox .dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  .header-summary-wrapper .statusbox .dropdown-menu a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+  }
+
+  /* Styles responsifs */
+  @media (max-width: 768px) {
+    .header-summary-wrapper .header {
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px;
+    }
+
+    .header-summary-wrapper .logo-container {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .header-summary-wrapper .header-right {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .header-summary-wrapper .nav-pills {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .header-summary-wrapper .nav-link {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-summary-wrapper .nav-pills {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-summary-wrapper .nav-link {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* Animation pour l'apparition */
+  .header-summary-wrapper {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   
@@ -233,10 +710,11 @@ transform: translateY(-17rem); /* Déplace sans modifier le flux naturel */
   
   .summary-page {
     width: 100%;
+    min-height: 100vh;
     transition: all 0.3s ease-in-out;
-    opacity: 0;
-    transform: scale(0); 
-    border-radius: 50%; 
+    opacity: 1; /* Make it visible by default */
+    transform: scale(1); /* Show at normal size */
+    border-radius: 0; /* Remove circular shape */
   }
   
   .summary-page.standard {

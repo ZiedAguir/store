@@ -30,13 +30,13 @@ const DetailProduct = ({ formData, onInputChange, onNestedInputChange ,inputSize
               <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
               <div className="col-lg-3-5 col-xl-4-5">
                 <div className="tab-content" id="tabContent">
-                  <PriceTab formData={formData} handleInputChange={onInputChange} priceErrors={priceErrors} />
-                  <InventoryTab formData={formData} handleInputChange={onInputChange} />
-                  <ShippingTab formData={formData} handleInputChange={onInputChange} handleNestedInputChange={onNestedInputChange} />
-                  <AttributesTab formData={formData} handleInputChange={onInputChange}  inputSizes={inputSizes} inputColors={inputColors} handleInputBlur={handleInputBlur} />
-                  <AdvancedTab formData={formData} handleInputChange={onInputChange} />
-                  <RatingTab formData={formData} handleInputChange={onInputChange} ratingErrors={ratingErrors} />
-                  <CategoryInfo formData={formData} handleInputChange={onInputChange}/>
+                  <PriceTab formData={formData} handleInputChange={onInputChange} priceErrors={priceErrors} activeTab={activeTab} />
+                  <InventoryTab formData={formData} handleInputChange={onInputChange} activeTab={activeTab} />
+                  <ShippingTab formData={formData} handleInputChange={onInputChange} handleNestedInputChange={onNestedInputChange} activeTab={activeTab} />
+                  <AttributesTab formData={formData} handleInputChange={onInputChange}  inputSizes={inputSizes} inputColors={inputColors} handleInputBlur={handleInputBlur} activeTab={activeTab} />
+                  <AdvancedTab formData={formData} handleInputChange={onInputChange} activeTab={activeTab} />
+                  <RatingTab formData={formData} handleInputChange={onInputChange} ratingErrors={ratingErrors} activeTab={activeTab} />
+                  <CategoryInfo formData={formData} handleInputChange={onInputChange} activeTab={activeTab}/>
                 </div>
               </div>
             </div>

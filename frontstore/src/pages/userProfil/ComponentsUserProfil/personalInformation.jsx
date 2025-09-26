@@ -3,7 +3,8 @@ import UploadWidget from "../../../componnent/UploadWidget/UploadWidget";
 import "./PersonalInformation.css";
 import apiRequest from "../../../componnent/axios/axiosInstance";
 
-function PersonalInformation() {
+function PersonalInformation({ activeTab }) {
+  const isActive = activeTab === "edit";
   const [avatar, setAvatar] = useState(""); 
 
   const handleSubmit = async (e) => {
@@ -32,7 +33,7 @@ function PersonalInformation() {
   };
 
   return (
-    <div id="edit" className="tab-pane">
+    <div id="edit" className={`tab-pane ${isActive ? "active" : ""}`}>
       <form className="p-3" onSubmit={handleSubmit}>
         <h4 className="mb-3 font-weight-semibold text-dark">Personal Information</h4>
         <div className="row mb-4">

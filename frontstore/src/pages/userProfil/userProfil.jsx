@@ -19,6 +19,7 @@ function UserProfil() {
     const { currentUser,setCustomizationSettings} = useContext(FormContext);
     const [reports, setReports] = useState([]);
     const [reportsLoading, setReportsLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState("edit");
     useEffect(() => {
       const fetchCustomizationSettings = async () => {
         try {
@@ -103,28 +104,26 @@ function UserProfil() {
             <div className="col-lg-8 col-xl-6">
               <div className="tabs">
                 <ul className="nav nav-tabs tabs-primary">
-                  <li className="nav-item active">
+                  {/* <li className={`nav-item ${activeTab === "overview" ? "active" : ""}`}>               le fase pour avoir le review
                     <button
                       className="nav-link"
-                      data-bs-target="#overview"
-                      data-bs-toggle="tab"
+                      onClick={() => setActiveTab("overview")}
                     >
                       Overview
                     </button>
-                  </li>
-                  <li className="nav-item">
+                  </li> */}
+                  <li className={`nav-item ${activeTab === "edit" ? "active" : ""}`}>
                     <button
                       className="nav-link"
-                      data-bs-target="#edit"
-                      data-bs-toggle="tab"
+                      onClick={() => setActiveTab("edit")}
                     >
                       Edit
                     </button>
                   </li>
                 </ul>
                 <div className="tab-content">
-                  <UsersReviews/>
-                  <PersonalInformation/>
+                  {/* <UsersReviews activeTab={activeTab}/> */}
+                  <PersonalInformation activeTab={activeTab}/>
                 </div>
               </div>
             </div>

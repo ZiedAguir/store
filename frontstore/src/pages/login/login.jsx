@@ -72,12 +72,16 @@ function Login() {
       
       const response = await apiRequest.post("/auth/login", { email, password });
       
-      // Stocker le token dans localStorage
-      if (response.data.accessToken) {
-        localStorage.setItem("token", response.data.accessToken);
-      }
+      console.log("Login response:", response.data);
       
-      setCurrentUser(response.data);
+      // Store user email and role for MFA verification (no token yet)
+      // The accessToken will be provided after MFA verification
+      setCurrentUser({ 
+        email: email, 
+        role: response.data.role 
+      });
+      
+      console.log("Navigating to MFA page...");
       navigate("/verify-mfa");
     } catch (err) {
       console.error("Error during login:", err);

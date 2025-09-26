@@ -18,31 +18,74 @@ export const useCurrentUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [lastFetched, setLastFetched] = useState(null); 
 
-  // Debug logging
+  // Debug logging (only in development)
   useEffect(() => {
-    console.log("useCurrentUser - currentUser:", currentUser);
-    console.log("useCurrentUser - isLoading:", isLoading);
-    console.log("useCurrentUser - errorMessage:", errorMessage);
+    if (process.env.NODE_ENV === 'development') {
+      console.log("useCurrentUser - currentUser:", currentUser);
+      console.log("useCurrentUser - isLoading:", isLoading);
+      console.log("useCurrentUser - errorMessage:", errorMessage);
+    }
   }, [currentUser, isLoading, errorMessage]);
 
   // Charger l'utilisateur au démarrage si un token existe
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token && !currentUser && !isLoading) {
-      console.log("useCurrentUser - Auto-fetching user on startup");
-      fetchUser();
-    }
-  }, [fetchUser, currentUser, isLoading]);
+      if (process.env.NODE_ENV === 'development') {
+        console.log("useCurrentUser - Auto-fetching user on startup");
+      }
+      // Appel direct sans dépendance pour éviter la circularité
+      const fetchUserDirect = async () => {
+        const now = Date.now();
+        const oneHour = 60 * 60 * 1000;
 
-  const handleError = (error, redirectOnUnauthorized = false) => {
+        if (currentUser && lastFetched && now - lastFetched < oneHour) {
+          return currentUser;
+        }
+
+        if (!token) {
+          setErrorMessage("No token found");
+          return null;
+        }
+
+        setIsLoading(true);
+        try {
+          const res = await apiRequest.get("/users/getMe");
+          setCurrentUser(res.data);
+          setLastFetched(now);
+          return res.data;
+        } catch (err) {
+          console.error("useCurrentUser - fetchUser: Error", err);
+          const errorMessage = err.response?.data?.message || "An error occurred";
+          setErrorMessage(errorMessage);
+          if (err.response?.status === 401) {
+            localStorage.removeItem("token");
+            setCurrentUser(null);
+            setLastFetched(null);
+          }
+          return null;
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
+      fetchUserDirect();
+    }
+  }, [currentUser, isLoading, lastFetched]);
+
+  const handleError = useCallback((error, redirectOnUnauthorized = false) => {
     const errorMessage = error.response?.data?.message || "An error occurred";
     console.error("useCurrentUser - handleError:", errorMessage);
     setErrorMessage(errorMessage);
 
     if (redirectOnUnauthorized && error.response?.status === 401) {
-      logout();
+      // Éviter l'appel à logout pour éviter la circularité
+      localStorage.removeItem("token");
+      setCurrentUser(null);
+      setLastFetched(null);
+      setErrorMessage(null);
     }
-  };
+  }, []);
 
   const fetchUser = useCallback(async () => {
     const now = Date.now();

@@ -1,7 +1,8 @@
 
-const ShippingTab = ({ formData,handleInputChange, handleNestedInputChange }) => {
+const ShippingTab = ({ formData,handleInputChange, handleNestedInputChange, activeTab }) => {
+  const isActive = activeTab === "shipping";
   return (
-    <div className="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
       <div className="form-group row align-items-center pb-3">
         <label className="col-lg-5 col-xl-3 control-label text-lg-end mb-0">
           Weight (kg)

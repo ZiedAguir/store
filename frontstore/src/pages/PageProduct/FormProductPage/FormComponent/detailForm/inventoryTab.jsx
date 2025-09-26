@@ -1,6 +1,7 @@
-const InventoryTab = ({ formData, handleInputChange }) => {
+const InventoryTab = ({ formData, handleInputChange, activeTab }) => {
+  const isActive = activeTab === "inventory";
   return (
-    <div className="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
+    <div className={`tab-pane fade ${isActive ? 'show active' : ''}`} id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
       <div className="form-group row align-items-center pb-3">
         <label className="col-lg-5 col-xl-3 control-label text-lg-end mb-0">
           Stock Status

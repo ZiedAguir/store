@@ -104,7 +104,7 @@ function InvoicePage() {
                         </p>
                         <p className="mb-0">
                           <span className="text-dark">Due Date:</span>
-                          <span className="value">06/20/2023</span>
+                          <span className="value">08/16/2025</span>
                         </p>
                       </div>
                     </div>
